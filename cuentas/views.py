@@ -8,16 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import RedirectView
-
-
-def home(request):
-    return render(request, 'home.html')
+from django.contrib.auth.models import User
 
 
 class LoginDir(SuccessMessageMixin, FormView):
     form_class = AuthenticationForm
-    template_name = "cuenta/login.html"
-    success_url = reverse_lazy("ZAP:sesion")
+    template_name = "home.html"
+    success_url = reverse_lazy("cuenta:sesion")
     success_message = "Welcome back %(username)s!"
 
     def dispatch(self, request, *args, **kwargs):
@@ -35,13 +32,31 @@ class LoginDir(SuccessMessageMixin, FormView):
 
 class Registro(SuccessMessageMixin, CreateView):
     form_class = UserCreationForm
-    template_name = "cuenta/registro.html"
-    success_url = reverse_lazy("ZAP:login")
+    template_name = "registro.html"
+    success_url = reverse_lazy("cuenta:home")
     success_message = "User was created successfully"
 
 
+class Sesion(ListView):
+    model = User
+    success_message = "Welcome back %(username)s!"
+    template_name = "mainalt.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+
+        user = self.request.user.id
+        print(user)
+        self.queryset = User.objects.filter(id=user)
+        return super(Sesion, self).dispatch(self.request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(Sesion, self).get_context_data(**kwargs)
+        return context
+
+
 class Logout(RedirectView):
-    pattern_name = 'cuenta:index'
+    pattern_name = 'cuenta:home'
 
     def get(self, request, *args, **kwargs):
         logout(request)

@@ -53,31 +53,38 @@ div:active {
 
 </style>
 </head>
-<body background="back3.png">
+<body background="http://files.vividscreen.info/soft/84d9d32e244d2660d7b2639d745380e7/Captain-America-1920x1408.jpg">
 
-	<center><table>
-		
-			<tr>
-				<td><img src="Zap.png"></td>
-			</tr>
-			
-			<tr>
-				<td align="center"><input placeholder="Usuario"></td>
-			</tr>
-			
-			<tr>
-				<td align="center"><input type="password" placeholder="Contraseña"></td>
-			</tr>
-			
-			<tr>
-				<td align="center"><a href="main.html"><div>Iniciar Sesión</div></a></td>
-			</tr>
+<center><table><form method="POST">
+    	{% csrf_token %}
 
-			<tr>
-				<td align="center"><a href="registro.html"><div>Registrarse</div></a></td>
-			</tr>
+			
+<tr>
+	<td>
+		{{ form.username.errors}}
+    	{{ form.username.label_tag}}
+    	{{ form.username}}
+	</td>
+
+</tr>
+<tr>
+	<td>
+		{{ form.password.errors}}
+    	{{ form.password.label_tag}}
+    	{{ form.password}}
+	</td>
+</tr>
+<tr>
+ 	<td>
+    	<input type="submit" value="iniciar sesion">
+    </td>
+</tr>
+</form>
+<tr>
+	<td align="center"><a href="{% url 'cuenta:Registro' %}"><div>Registrarse</div></a></td>
+</tr>
 		
-	</table></center>
+</table></center>
 
 
 </body>

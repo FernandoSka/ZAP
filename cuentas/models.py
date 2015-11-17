@@ -13,16 +13,10 @@ class Datosextra(models.Model):
 
 class Tipnot(models.Model):
     """docstring for tip_not"""
-    tipo = models.CharField(max_length=None, blank=False)
+    tipo = models.CharField(max_length=15, blank=False)
 
 
 class Noticia(models.Model):
     """docstring for noticia"""
     id_persona = models.ForeignKey(User)
     id_tipo = models.ForeignKey(Tipnot)
-
-
-class Amigo(models.Model):
-    """docstring for Amigo"""
-    id_persona = models.ForeignKey(User)
-    id_persona2 = models.ForeignKey(User)
