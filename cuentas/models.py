@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Datosextra(models.Model):
+class Usuarios(models.Model):
     """docstring for telefono"""
-    id_persona = models.ForeignKey(User)
+    id_persona = models.OneToOneField(User)
     tel = models.IntegerField(null=True, blank=True)
     fecha = models. DateField(auto_now=False, auto_now_add=False)
 
@@ -20,3 +20,9 @@ class Noticia(models.Model):
     """docstring for noticia"""
     id_persona = models.ForeignKey(User)
     id_tipo = models.ForeignKey(Tipnot)
+
+
+class Amigo(models.Model):
+    """docstring for Amigo"""
+    usr1 = models.OneToOneField(User)
+    usr2 = models.ManyToManyField('Amigo')

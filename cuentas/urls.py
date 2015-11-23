@@ -17,7 +17,7 @@ from django.conf.urls import url
 from cuentas.views import LoginDir, Registro, Logout, Sesion
 
 urlpatterns = [
-    url(r'^home/$', LoginDir.as_view(), name="login"),
+    url(r'^home/$', LoginDir.as_view(), name="home"),
     url(r'^Registro/$', Registro.as_view(), name="Registro"),
     url(r'^Logout/$', Logout.as_view(), name="Logout"),
     url(r'^sesion/$', Sesion.as_view(), name="sesion")

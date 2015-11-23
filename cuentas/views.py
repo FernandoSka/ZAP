@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
+from cuentas.forms import RegisterForm
 from django.views.generic import TemplateView, ListView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic.edit import CreateView, DeleteView, FormView
+from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse_lazy
@@ -31,7 +32,7 @@ class LoginDir(SuccessMessageMixin, FormView):
 
 
 class Registro(SuccessMessageMixin, CreateView):
-    form_class = UserCreationForm
+    form_class = RegisterForm
     template_name = "registro.html"
     success_url = reverse_lazy("cuenta:home")
     success_message = "User was created successfully"
@@ -39,20 +40,11 @@ class Registro(SuccessMessageMixin, CreateView):
 
 class Sesion(ListView):
     model = User
-    success_message = "Welcome back %(username)s!"
     template_name = "mainalt.html"
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-
-        user = self.request.user.id
-        print(user)
-        self.queryset = User.objects.filter(id=user)
         return super(Sesion, self).dispatch(self.request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(Sesion, self).get_context_data(**kwargs)
-        return context
 
 
 class Logout(RedirectView):

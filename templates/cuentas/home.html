@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <html>
@@ -53,11 +54,13 @@ div:active {
 
 </style>
 </head>
-<body background="http://files.vividscreen.info/soft/84d9d32e244d2660d7b2639d745380e7/Captain-America-1920x1408.jpg">
+<body background="{% static "img/back3.png" %}">
 
 <center><table><form method="POST">
     	{% csrf_token %}
-
+<tr>
+				<td><img src="{% static "img/ZAP.png" %}"></td>
+			</tr>
 			
 <tr>
 	<td>

@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <html>
@@ -53,7 +54,7 @@ div:active {
 
 </style>
 </head>
-<body background="back3.png">
+<body background="{% static "img/back3.png" %}">
 
 	<form method="POST"><center><table>
     	{% csrf_token %}
@@ -73,10 +74,7 @@ div:active {
     	{{ form.password1.label_tag}}
     	{{ form.password1}}
 	</td>
-</tr>
-<tr>
-    	 
-<tr>
+</tr><tr>
 	<td>
 		{{ form.password2.errors}}
     	{{ form.password2.label_tag}}
@@ -84,24 +82,26 @@ div:active {
 	</td>
 </tr>
 <tr>
+    	 
+<tr>
 	<td>
-		{{ form.id_first_name.errors}}
-    	{{ form.id_first_name.label_tag}}
-    	{{ form.id_first_name}}
+		{{ form.first_name.errors}}
+    	{{ form.first_name.label_tag}}
+    	{{ form.first_name}}
 	</td>
 </tr>
 <tr>
 	<td>
-		{{ form.id_last_name.errors}}
-    	{{ form.id_last_name.label_tag}}
-    	{{ form.id_last_name}}
+		{{ form.last_name.errors}}
+    	{{ form.last_name.label_tag}}
+    	{{ form.last_name}}
 	</td>
 </tr>
 <tr>
 	<td>
-		{{ form.id_email.errors}}
-    	{{ form.id_email.label_tag}}
-    	{{ form.id_email}}
+		{{ form.email.errors}}
+    	{{ form.email.label_tag}}
+    	{{ form.email}}
 	</td>
 <tr>
  	<td>
